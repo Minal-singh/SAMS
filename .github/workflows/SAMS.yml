@@ -1,0 +1,32 @@
+name: SAMS CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.9
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Collect Static
+      run: |
+        python manage.py collectstatic --no-input
+    - name: Run Unit Tests
+      run: |
+        python manage.py test
+    - name: Run Coverage Tests
+      run: |
+        coverage run manage.py test && coverage report --fail-under=85
