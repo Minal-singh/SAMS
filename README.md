@@ -2,7 +2,7 @@
 
 # Student Attendance Management System Created Using Django
 
-[Project Demo on YouTube]
+[Project Demo on YouTube] https://youtu.be/KAnLCyCZOEM
 
 And if you like this project, then ADD a STAR ⭐️  to this project 👆
 
