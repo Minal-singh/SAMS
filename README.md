@@ -69,14 +69,14 @@ StudentAttendancePage
 
 Install Virtual Environment First
 ```
-$  pip install virtualenv
+pip install virtualenv
 ```
 
 Create Virtual Environment
 
 For Windows
 ```
-$  python -m venv venv
+python -m venv venv
 ```
 For Mac
 ```
@@ -91,7 +91,7 @@ Activate Virtual Environment
 
 For Windows
 ```
-$  source venv/scripts/activate
+venv/scripts/activate
 ```
 
 For Mac
@@ -106,21 +106,21 @@ $  source bin/activate
 
 **3. Clone this project**
 ```
-$  git clone https://github.com/Minal-singh/SAMS
+git clone https://github.com/Minal-singh/SAMS
 ```
 
 Then, Enter the project
 ```
-$  cd SAMS
+cd SAMS
 ```
 
 **4. Install Requirements from 'requirements.txt'**
 
 For Windows
 ```
-$  pip install https://github.com/Minal-singh/dlib/blob/master/dlib-19.23.0-cp39-cp39-win_amd64.whl?raw=true
-$  pip install cmake
-$  pip install -r requirements.txt
+pip install https://github.com/Minal-singh/dlib/blob/master/dlib-19.23.0-cp39-cp39-win_amd64.whl?raw=true
+pip install cmake
+pip install -r requirements.txt
 ```
 For Linux and Mac
 ```python
@@ -131,7 +131,7 @@ $  pip3 install -r requirements-linux.txt
 
 Command for Windows:
 ```python
-$ python manage.py collectstatic --no-input
+python manage.py collectstatic --no-input
 ```
 
 Command for Mac:
@@ -148,9 +148,9 @@ $ python3 manage.py collectstatic --no-input
 
 Command for Windows:
 ```python
-$ python manage.py makemigrations main_app
-$ python manage.py migrate
-$ python manage.py runserver
+python manage.py makemigrations main_app
+python manage.py migrate
+python manage.py runserver
 ```
 
 Command for Mac:
