@@ -45,6 +45,7 @@ class TestAdminViews(TestCase):
 
     def test_only_admin_should_access_admin_pages(self):
         CustomUser.objects.create_user(email="user@email.com", user_type=2, password="password")
+        self.client.post(reverse("logout"))
         self.client.post(reverse("login"), {"email": "user@email.com", "password": "password"})
         response = self.client.get(reverse("admin_home"))
         self.assertEqual(response.status_code, 302)
