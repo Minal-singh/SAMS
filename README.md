@@ -76,7 +76,7 @@ Create Virtual Environment
 
 For Windows
 ```
-python -m venv venv
+virtualenv venv
 ```
 For Mac
 ```
