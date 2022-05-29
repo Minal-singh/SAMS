@@ -27,9 +27,25 @@ And if you like this project, then ADD a STAR ⭐️  to this project 👆
 
 **Login Page**
 
+<img src="Screenshots/LoginPage.jpg"/>
+
 **Admin Portal**
 
+AdminDashboard
+<img src="Screenshots/AdminDashboard.jpg"/>
+StudentsPage
+<img src="Screenshots/StudentsPage.jpg"/>
+AttendancePage
+<img src="Screenshots/AttendancePage.jpg"/>
+RegisterPage
+<img src="Screenshots/RegisterPage.jpg"/>
+
 **Student Portal**
+
+StudentDashboard
+<img src="Screenshots/StudentDashboard.jpg"/>
+StudentAttendancePage
+<img src="Screenshots/StudentAttendancePage.jpg"/>
 
 
 ## How to Install and Run this project?
