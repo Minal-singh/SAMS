@@ -29,4 +29,4 @@ jobs:
         python manage.py test
     - name: Run Coverage Tests
       run: |
-        coverage run manage.py test && coverage report --fail-under=85
+        coverage run manage.py test && coverage report -i --fail-under=85
