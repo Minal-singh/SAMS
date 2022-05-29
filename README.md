@@ -143,3 +143,33 @@ Command for Windows:
 ```
 python manage.py createsuperuser
 ```
+
+## Satisfying judging criteria
+**Code Performance Optimization**
+1. One time model training to reduce execution time.
+2. Not storing attendance image to reduce memeory consumption.
+3. Using default sqlite3 database of django to maintain database throughput and response time.
+
+**Coding Best Practices**
+1. Provided proper comments anywhere required, mostly in views.
+2. Followed Python PEP8 convention for consistent indentation.
+3. Maintained detailed naming convention that are self explanatory.
+4. Implement the continuous integration using github actions.(CI/CD)
+5. Test the application using python Unittest. Tests are not written for face recognition views as most of the part requires interaction with os and camera access.
+6. The test coverage is 89% for the application.
+
+**Functional Features**
+1. Two type of user profiles- Admin and Student.
+2. User authentication using email and password.
+3. Student registration.
+4. Stuedent management (Update and Delete).
+5. Dataset creation using opencv.
+6. Model training using kNN model.
+7. Mark Attendance using face recognition at real time.
+8. Data visualization using chartjs.
+9. Export excel - attendance data using xlwt pacakage.
+10. Form validation.
+11. Filter attendance according to branch, session , course or date.
+12. Guide for FAQs.
+
+### The dev repository for this project is https://github.com/Minal-singh/AMS
