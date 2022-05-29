@@ -1,0 +1,63 @@
+{% extends "admin_templates/base.html" %} 
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href= {% static 'css/guide.css' %}>
+{% endblock head %}
+{% block title %}
+Guide
+{% endblock title %} 
+{% block content %}
+
+<div class="container p-5">
+    <div class="accordion accordion-flush" id="accordionFlush">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="question-heading-one">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-one" aria-expanded="false" aria-controls="question-one">
+            <b>Something went wrong during dataset creation?</b>
+        </button>
+        </h2>
+        <div id="question-one" class="accordion-collapse collapse" aria-labelledby="question-heading-one" data-bs-parent="#accordionFlush">
+            <div class="accordion-body">
+                It might be because of following reasons:-
+                <ol>
+                    <li>No camera access to application or browser.</li>
+                    <li>Poor lighting conditions resulting in invalid frames.</li>
+                    <li>Rejection of too many frames due to improper face alignment.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="question-heading-two">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-two" aria-expanded="false" aria-controls="question-two">
+            <b>How much time training will take?</b>
+        </button>
+        </h2>
+        <div id="question-two" class="accordion-collapse collapse" aria-labelledby="question-heading-two" data-bs-parent="#accordionFlush">
+        <div class="accordion-body">
+            Don't panic, it is a one time process and might take several minutes depending upon following factors:-
+            <ol>
+                <li>GPU availability.</li>
+                <li>Processor speed.</li>
+                <li>Size of dataset.</li>
+                <li>Example:- Training of 1800 images took around 20 minutes for ryzen3 processor along with 8gb ram and no gpu configuration.</li>
+            </ol>
+        </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="question-heading-three">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-three" aria-expanded="false" aria-controls="question-three">
+            <b>Contact for more queries.</b>
+        </button>
+        </h2>
+        <div id="question-three" class="accordion-collapse collapse" aria-labelledby="question-heading-three" data-bs-parent="#accordionFlush">
+        <div class="accordion-body">
+            <b>Email: </b>contact.minalsingh@gmail.com
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock content %}

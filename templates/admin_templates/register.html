@@ -1,0 +1,201 @@
+{% extends 'admin_templates/base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" type="text/css" href= {% static 'css/register_student.css' %}> 
+{% endblock head %} 
+{% block title %} Register Student {% endblock title %} 
+{% block content %} 
+{% include '_partials/flash_messages.html' %}
+
+
+<div class="wrapper rounded bg-white">
+  <div class="row  pb-2">
+    <div class="h3 col-sm-8">Student Registration Form</div>
+    <a class="col-sm-4" href="?reset=true">
+      <button class="btn btn-danger float-end">Reset Form</button>
+    </a>
+  </div>
+  <form class="g-3 needs-validation"
+      method="POST"
+      enctype="multipart/form-data"
+      novalidate>
+    {% csrf_token %}
+    <div class="row p-1">
+      <div class="col-md-6 mt-md-0 mt-3">
+        <label>First Name</label>
+        <input
+          class="form-control"
+          type="text"
+          name="first_name"
+          value="{{data.first_name}}"
+          placeholder="e.g. John"
+          required
+        />
+        <div class="invalid-feedback">
+          This is a required field.
+        </div>
+      </div>
+      <div class="col-md-6 mt-md-0 mt-3">
+        <label>Last Name</label>
+        <input
+          class="form-control"
+          type="text"
+          name="last_name"
+          value="{{data.last_name}}"
+          placeholder="Doe"
+          required
+        />
+        <div class="invalid-feedback">
+          This is a required field.
+        </div>
+      </div>
+    </div>
+    <div class="row p-1">
+      <div class="col-md-6 mt-md-0 mt-3">
+        <label>Email</label>
+        <input
+          class="form-control"
+          type="email"
+          name="email"
+          value="{{data.email}}"
+          placeholder="user@example.com"
+          required
+        />
+        <div class="invalid-feedback">
+          This is a required field.
+        </div>
+      </div>
+      <div class="col-md-6 mt-md-0 mt-3">
+        <label>Profile Picture</label>
+        <input class="form-control" type="file" accept="image/*" name="profile_pic" />
+      </div>
+    </div>
+    <div class="row p-1">
+      <div class="col-md-6 mt-md-0 mt-3">
+        <label>Roll number</label>
+        <input
+          class="form-control"
+          type="text"
+          name="roll_no"
+          value="{{data.roll_no}}"
+          placeholder="Roll Number"
+          required
+        />
+        <div class="invalid-feedback">
+          This is a required field.
+        </div>
+      </div>
+      <div class="col-md-6 mt-md-0 mt-3">
+        <label>Gender</label>
+        <div class="d-flex align-items-center mt-2">
+          <label class="option">
+            <input type="radio" name="gender" value="M" />Male
+            <span class="checkmark"></span>
+          </label>
+          <label class="option ms-4">
+            <input type="radio" name="gender" value="F" />Female
+            <span class="checkmark"></span>
+          </label>
+          <label class="option ms-4">
+            <input type="radio" name="gender" value="N" />Non-binary
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row p-1">
+      <div class="col-md-3 mt-md-0 mt-3">
+        <label>Course</label>
+        <input
+          class="form-control"
+          type="text"
+          name="course"
+          value="{{data.course}}"
+          placeholder="B. Tech."
+          required
+        />
+        <div class="invalid-feedback">
+          This is a required field.
+        </div>
+      </div>
+      <div class="col-md-3 mt-md-0 mt-3">
+        <label>Branch</label>
+        <input
+          class="form-control"
+          type="text"
+          name="branch"
+          value="{{data.branch}}"
+          placeholder="CSE"
+          required
+        />
+        <div class="invalid-feedback">
+          This is a required field.
+        </div>
+      </div>
+      <div class="col-md-3 mt-md-0 mt-3">
+        <label>Session Start Year</label>
+        <input
+          class="form-control"
+          type="text"
+          name="session_start_year"
+          value="{{data.session_start_year}}"
+          placeholder="yyyy"
+          required
+        />
+        <div class="invalid-feedback">
+          This is a required field.
+        </div>
+      </div>
+      <div class="col-md-3 mt-md-0 mt-3">
+        <label>Session End Year</label>
+        <input
+          class="form-control form-control-sm"
+          type="text"
+          name="session_end_year"
+          value="{{data.session_end_year}}"
+          placeholder="yyyy"
+          required
+        />
+        <div class="invalid-feedback">
+          This is a required field.
+        </div>
+      </div>
+    </div>
+    <div class="row p-1">
+      <div class="col-md-6 mt-md-0 mt-3">
+        <label>Password</label>
+        <input
+          class="form-control"
+          type="password"
+          name="password"
+          value=""
+          required
+        />
+        <div class="invalid-feedback">
+          This is a required field.
+        </div>
+      </div>
+      <div class="col-md-6 mt-md-0 mt-3">
+        <label>Confirm Password</label>
+        <input class="form-control"
+          type="password"
+          name="password2"
+          value=""
+          required
+        />
+        <div class="invalid-feedback">
+          This is a required field.
+        </div>
+      </div>
+    </div>
+      <input
+        type="submit"
+        value="Register Student"
+        class="btn btn-primary mt-3"
+      />
+  </form>
+</div>
+
+<script type="text/javascript" src={% static "js/register_student.js" %}></script>
+
+{% endblock content %}

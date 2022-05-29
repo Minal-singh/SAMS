@@ -1,0 +1,420 @@
+{% extends "admin_templates/base.html" %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" type="text/css" href= {% static 'css/student_details.css' %}> 
+{% endblock head %} 
+{% block title %} Student detail {% endblock title %} 
+
+{%block content %} 
+{% include '_partials/flash_messages.html'%}
+
+<div class="container mt-3 bg-light">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              {% if student.user.profile_pic %}
+              <img
+                src="{{ student.user.profile_pic.url }}"
+                alt="Admin"
+                class="rounded-circle"
+                width="150"
+              />
+              {% else %} 
+              <img src={% static 'img/user.jpg' %} alt="Admin"
+              class="rounded-circle" width="150" /> 
+              {% endif %}
+              <div class="mt-3">
+                <h4>{{student.user.first_name}} {{student.user.last_name}}</h4>
+              </div>
+              <div class="mt-3">
+                <a href={% url 'edit_student' student.user_id %} }>
+                  <button class="btn btn-primary">Edit</button>
+                </a>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#deleteStudentConfirmationModal"
+                >
+                  Delete
+                </button>
+              </div>
+              <div class="mt-4">
+                {% if student.dataset_created %}
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#recreateConfirmationModal"
+                >
+                  Re-create Dataset
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#deleteConfirmationModal"
+                >
+                  Delete Dataset
+                </button>
+                {% else %}
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#createConfirmationModal"
+                >
+                  Create Dataset
+                </button>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">First Name</h6>
+              </div>
+              <div class="col-sm-9">{{student.user.first_name}}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Last Name</h6>
+              </div>
+              <div class="col-sm-9">{{student.user.last_name}}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9">{{student.user.email}}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Gender</h6>
+              </div>
+              <div class="col-sm-9">
+                {% if student.user.gender == "M" %} Male 
+                {% elif student.user.gender == "F" %} Female 
+                {% else %} Non-binary 
+                {% endif %}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Course</h6>
+              </div>
+              <div class="col-sm-9">{{student.course}}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Branch</h6>
+              </div>
+              <div class="col-sm-9">{{student.branch}}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Session</h6>
+              </div>
+              <div class="col-sm-9">{{student.session}}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Roll Number</h6>
+              </div>
+              <div class="col-sm-9">{{student.roll_no}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container bg-light">
+  <div class="row d-flex justify-content-around">
+    <div class="col-lg-6 col-md-12 card ml-4 my-3">
+      <div class="card-body">
+      <div class="container">
+        <form method="GET" autocomplete="off">
+          <div class="mt-2">
+            <div class="d-flex flex-row input-group input-daterange">
+              {% for field in filter.form %}
+              <div><b>{{field.label_tag}}</b> {{field}}</div>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-dark mt-2">Filter</button>
+          </div>
+        </form>
+      </div>
+      <div class="container">
+        <section class="table-section">
+          <div class="container mt-0 pt-0 rounded bg-white px-md-5">
+            <div class="table-responsive">
+              <table
+                class="table"
+                id="table"
+                data-toggle="table"
+                data-pagination="true"
+              >
+                <thead>
+                  <tr>
+                    <th data-field="s.no.">S.No.</th>
+                    <th class="text-center" data-sortable="true" data-field="date">
+                      Date
+                    </th>
+                    <th class="text-center" data-sortable="true" data-field="present">
+                      Present
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for attendance in attendance_list %}
+
+                  <tr class="bg-blue">
+                    <td class="pt-3">{{forloop.counter}}</td>
+                    <td class="pt-3 text-center">{{attendance.date}}</td>
+                    <td class="pt-3 text-center">
+                      {% if attendance.present %}
+                      <i class="fa-solid fa-check"></i>
+                      {% else %}
+                      <i class="fa-solid fa-xmark"></i>
+                      {% endif %}
+                    </td>
+                  </tr>
+
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-8 col-sm-12 p-lg-5 p-md-3 card my-3">
+      <div class="card-body">
+        <canvas id="myChart" width="100" height="100"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Modal -->
+<div
+  class="modal fade"
+  id="createConfirmationModal"
+  tabindex="-1"
+  aria-labelledby="createConfirmationModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createConfirmationModalLabel">
+          Create Dataset
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Create dataset for {{student.user.first_name}}
+        {{student.user.last_name}}
+      </div>
+      <div class="modal-footer">
+        <form
+          action="{%url 'create_dataset_for_student' student.user_id %}"
+          method="POST"
+        >
+          {% csrf_token%}
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <input
+            type="submit"
+            value="Create Dataset"
+            class="btn btn-block btn-primary"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Re-create Dataset Modal -->
+<div
+  class="modal fade"
+  id="recreateConfirmationModal"
+  tabindex="-1"
+  aria-labelledby="recreateConfirmationModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="recreateConfirmationModalLabel">
+          Re-create Dataset
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Re-creating dataset for {{student.user.first_name}}
+        {{student.user.last_name}}
+      </div>
+      <div class="modal-footer">
+        <form
+          action="{%url 'create_dataset_for_student' student.user_id %}"
+          method="POST"
+        >
+          {% csrf_token%}
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <input
+            type="submit"
+            value="Re-create Dataset"
+            class="btn btn-block btn-primary"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Dataset Modal -->
+<div
+  class="modal fade"
+  id="deleteConfirmationModal"
+  tabindex="-1"
+  aria-labelledby="deleteConfirmationModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmationModalLabel">
+          Delete Dataset
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Delete dataset for {{student.user.first_name}}
+        {{student.user.last_name}}
+      </div>
+      <div class="modal-footer">
+        <form action="{%url 'delete_dataset_for_student' student.user_id %}" method="POST">
+          {% csrf_token %}
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <input
+            type="submit"
+            value="Delete Dataset"
+            class="btn btn-block btn-danger"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Student Modal -->
+<div class="modal fade" id="deleteStudentConfirmationModal" tabindex="-1" aria-labelledby="deleteStudentConfirmationModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteStudentConfirmationModalLabel">Train Model</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Student once deleted cannot be restored, if model is trained for this student, requires model re-training to delete student details from model.
+      </div>
+      <div class="modal-footer">
+        <form action="{%url 'delete_student' student.user_id %}" method="POST">
+          {% csrf_token%}
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <input type="submit" value="Confirm Delete" class="btn btn-block btn-danger" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".input-daterange").datepicker({
+      format: "yyyy-mm-dd",
+      todayHighlight: true,
+    });
+  });
+
+    const ctx = document.getElementById("myChart").getContext("2d");
+    const myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ["Present","Absent"],
+        datasets: [{
+            label: 'Attendance',
+            data: [ {{present_count}},{{absent_count}} ],
+            backgroundColor: [
+              'rgb(80,216,46)',
+              'rgb(255, 99, 132)'
+            ],
+            hoverOffset: 4
+        }],
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Attendance',
+                    font: {
+                        size: 16
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock content %}

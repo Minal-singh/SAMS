@@ -1,0 +1,21 @@
+<div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+  <ul class="nav flex-column text-white w-100">
+    <a href={% url 'student_home' %} class="nav-link text-white text-uppercase justify-content-center m-2">
+      Student
+    </a>
+    <li>
+      <a href={% url 'student_home' %} class="list-group-item list-group-item-action p-2 ripple" aria-current="true">
+        <i class="fa-solid fa-chart-line me-3 px-1"></i><span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a href={% url 'student_attendance' %} class="list-group-item list-group-item-action p-2 ripple">
+        <i class="fa-solid fa-chart-simple me-3 px-1"></i><span>Attendance</span>
+      </a>
+    </li>
+    <li>
+      <a href={% url 'logout' %} class="list-group-item list-group-item-action p-2 ripple">
+        <i class="fa-solid fa-right-from-bracket me-3 px-1"></i><span>Logout</span></a>
+    </li>
+  </ul>
+</div>

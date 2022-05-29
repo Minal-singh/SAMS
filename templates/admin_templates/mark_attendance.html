@@ -1,0 +1,25 @@
+{% extends "admin_templates/base.html" %} 
+{% load static %} 
+{% block title %} 
+Mark Attendance
+{% endblock title %} 
+{% block content %}
+
+<div class="container mt-2 h-100">
+  {% include '_partials/flash_messages.html' %}
+  <div class="container-fluid d-flex justify-content-center bg-img">
+    <img src={% static 'img/Camera.svg' %} alt="">
+  </div>
+  <div class="container-fluid d-flex justify-content-center">
+    <form action="{%url 'mark_attendance'%}" method="POST">
+      {% csrf_token%}
+      <input
+        type="submit"
+        value="Mark Attendance"
+        class="btn btn-block btn-primary btn-lg rounded-pill"
+      />
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

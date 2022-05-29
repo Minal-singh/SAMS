@@ -1,0 +1,11 @@
+[run]
+omit=
+    */tests/*
+    */static/*
+    */templates/*
+    */migrations/*
+    */__pycache__/*
+    */__init__.py
+    manage.py
+    main_app\face_recognition_views.py
+    main_app\middleware.py

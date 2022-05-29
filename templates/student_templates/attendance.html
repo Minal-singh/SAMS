@@ -1,0 +1,121 @@
+{% extends "student_templates/base.html" %}
+{% load static %}
+{% block title %} Student | Attendance {% endblock %}
+
+{% block content %}
+
+<div class="container bg-light mt-3">
+  <div class="row d-flex justify-content-around">
+    <div class="col-lg-6 col-md-12 card ml-4 my-3">
+      <div class="card-body">
+      <div class="container">
+        <form method="GET" autocomplete="off">
+          <div class="mt-2">
+            <div class="d-flex flex-row input-group input-daterange">
+              {% for field in filter.form %}
+              <div><b>{{field.label_tag}}</b> {{field}}</div>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-dark mt-2">Filter</button>
+          </div>
+        </form>
+      </div>
+      <div class="container">
+        <section class="table-section">
+          <div class="container mt-0 pt-0 rounded bg-white px-md-5">
+            <div class="table-responsive">
+                  <table
+                    class="table"
+                    id="table"
+                    data-toggle="table"
+                    data-pagination="true"
+                  >
+                    <thead>
+                      <tr>
+                          <th data-field="s.no.">S.No.</th>
+                        <th
+                          class="text-center"
+                          data-sortable="true"
+                          data-field="date"
+                        >
+                          Date
+                        </th>
+                        <th
+                          class="text-center"
+                          data-sortable="true"
+                          data-field="present"
+                        >
+                          Present
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for attendance in attendance_list %}
+
+                      <tr class="bg-blue">
+                        <td class="pt-3">{{forloop.counter}}</td>
+                        <td class="pt-3 text-center">{{attendance.date}}</td>
+                        <td class="pt-3 text-center">
+                            {% if attendance.present %}
+                            <i class="fa-solid fa-check"></i>
+                            {% else %}
+                            <i class="fa-solid fa-xmark"></i>
+                            {% endif %}
+                        </td>
+                      </tr>
+
+                      {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+        </section>
+      </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-8 col-sm-12 p-lg-5 p-md-3 card my-3">
+      <div class="card-body">
+        <canvas id="myChart" width="100" height="100"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".input-daterange").datepicker({
+      format: "yyyy-mm-dd",
+      todayHighlight: true,
+    });
+  });
+
+    const ctx = document.getElementById("myChart").getContext("2d");
+    const myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ["Present","Absent"],
+        datasets: [{
+            label: 'Attendance',
+            data: [ {{present_count}},{{absent_count}} ],
+            backgroundColor: [
+              'rgb(80,216,46)',
+              'rgb(255, 99, 132)'
+            ],
+            hoverOffset: 4
+        }],
+        },
+    options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Attendance',
+                font: {
+                    size: 16
+                }
+            }
+        }
+    }
+    });
+</script>
+
+{% endblock content %}

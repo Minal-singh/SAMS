@@ -1,0 +1,50 @@
+<div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+  <ul class="nav flex-column text-white w-100">
+    <a href={% url 'admin_home' %} class="nav-link text-white text-uppercase justify-content-center m-2">
+      Admin
+    </a>
+    <li>
+      <a href={% url 'admin_home' %} class="list-group-item list-group-item-action p-2 ripple" aria-current="true">
+        <i class="fa-solid fa-chart-line me-3 px-1"></i><span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a href={% url 'students' %} class="list-group-item list-group-item-action p-2 ripple">
+        <i class="fa-solid fa-graduation-cap me-3 px-1"></i><span>Students</span>
+      </a>
+    </li>
+    <li>
+      <a href={% url 'attendance' %} class="list-group-item list-group-item-action p-2 ripple">
+        <i class="fa-solid fa-chart-column me-3 px-1"></i><span>Attendance Report</span>
+      </a>
+    </li>
+    <li>
+      <a href={% url 'register_student' %} class="list-group-item list-group-item-action p-2 ripple">
+        <i class="fa-regular fa-address-card me-3 px-1"></i></i><span>Register Student</span>
+      </a>
+    </li>
+    <li>
+      <a href={% url 'create_dataset' %} class="list-group-item list-group-item-action p-2 ripple ">
+        <i class="fa-solid fa-camera me-3 px-1"></i><span>Create Dataset</span>
+      </a>
+    </li>
+    <li>
+      <a href={% url 'train_model' %} class="list-group-item list-group-item-action p-2 ripple ">
+        <i class="fa-solid fa-screwdriver-wrench me-3 px-1"></i><span>Train Model</span>
+      </a>
+    </li>
+    <li>
+      <a href={% url 'mark_attendance' %} class="list-group-item list-group-item-action p-2 ripple ">
+        <i class="fa-solid fa-calendar-check me-3 px-1"></i></i><span>Mark Attendance</span>
+      </a>
+    </li>
+    <li>
+      <a href={% url 'guide' %} class="list-group-item list-group-item-action p-2 ripple">
+        <i class="fa-solid fa-circle-question me-3 px-1"></i><span>Guide</span></a>
+    </li>
+    <li>
+      <a href={% url 'logout' %} class="list-group-item list-group-item-action p-2 ripple">
+        <i class="fa-solid fa-right-from-bracket me-3 px-1"></i><span>Logout</span></a>
+    </li>
+  </ul>
+</div>
