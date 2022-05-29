@@ -78,30 +78,12 @@ For Windows
 ```
 virtualenv venv
 ```
-For Mac
-```
-$  python3 -m venv venv
-```
-For Linux
-```
-$  virtualenv .
-```
 
 Activate Virtual Environment
 
 For Windows
 ```
 venv\scripts\activate
-```
-
-For Mac
-```
-$  source venv/bin/activate
-```
-
-For Linux
-```
-$  source bin/activate
 ```
 
 **3. Clone this project**
@@ -124,7 +106,7 @@ pip install -r requirements.txt
 ```
 For Linux and Mac
 ```python
-$  pip3 install -r requirements-linux.txt
+pip3 install -r requirements-linux.txt
 ```
 
 **5. Collect Static**
@@ -134,16 +116,6 @@ Command for Windows:
 python manage.py collectstatic --no-input
 ```
 
-Command for Mac:
-```python
-$ python3 manage.py collectstatic --no-input
-```
-
-Command for Linux:
-```python
-$ python3 manage.py collectstatic --no-input
-```
-
 **6. Now Run Server**
 
 Command for Windows:
@@ -151,20 +123,6 @@ Command for Windows:
 python manage.py makemigrations main_app
 python manage.py migrate
 python manage.py runserver
-```
-
-Command for Mac:
-```python
-$ python3 manage.py makemigrations main_app
-$ python3 manage.py migrate
-$ python3 manage.py runserver
-```
-
-Command for Linux:
-```python
-$ python3 manage.py makemigrations main_app
-$ python3 manage.py migrate
-$ python3 manage.py runserver
 ```
 
 **7. Login Credentials**
@@ -183,15 +141,5 @@ Password: password
 Create Super User
 Command for Windows:
 ```
-$  python manage.py createsuperuser
-```
-
-Command for Mac:
-```
-$  python3 manage.py createsuperuser
-```
-
-Command for Linux:
-```
-$  python3 manage.py createsuperuser
+python manage.py createsuperuser
 ```
